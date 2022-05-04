@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+  miniconda3:
+    container_name: mini3_bandit
+    image: continuumio/miniconda3 # check the latest version on docker hub.
+    hostname: mini3_bandit # set an easy hostname to remember
+    volumes: # mount our data volumes.
+       - '/home/blanka/workingstorage/scu/my_bandit_test/20220504_homework:/working_dir'
+    working_dir: '/working_dir'
+    ports:
+        - '5000:15000'
+        - '5001:15001'
+        - '5002:15002'
+        - '5003:15003'
+    links:
+        - 'db'
+    command: sh -c 'tail -f /var/log/*'
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: '123'
+      MYSQL_DATABASE: 'app_db'
+      MYSQL_USER: 'lab'
+      MYSQL_PASSWORD: '123' 
+    ports:
+      - "6033:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+volumes:
+  dbdata:
+
