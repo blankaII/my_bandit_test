@@ -30,7 +30,7 @@
 ################################################################################
 - http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000
 
-<plaintext>
+<p><code>
 @startuml
 User -> WebA : 30% choose A, 10% choose B
 User -> WebB : 10% choose A, 30% choose B
@@ -40,4 +40,4 @@ DB -> Bandit : AB test algorithm
 Bandit -> Web_Breeder : feedback WebA or WebB base on result of AB test
 Web_Breeder -> User : feedback greedy option
 @enduml
-</plaintext>
+</code></p>
