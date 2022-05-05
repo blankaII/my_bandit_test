@@ -13,11 +13,12 @@ DB <-> Accounting : update current net/gross income
 DB <-> Statistics : update click rate
 DB <-> Statistics : update statistics
 DB -> Report : KPI reports
-DB -> Bandit : recommand system algorithm with latest data
-Bandit -> Web : fetch greedy option(A or B or C) for next user
+DB -> RecmdSys : Recommand System algorithm with latest data
+RecmdSys -> DB : store recommandation to DB based on current result
+DB -> Web : fetch current recommanded content to next user
 
 Web -> Growthbook : click was snapped
 Growthbook -> DB : growthbook internal
-Growthbook -> Web : fetch greedy option(A or B or C) for next user
+Growthbook -> DB : store recommand content to DB
 @enduml
 ```
