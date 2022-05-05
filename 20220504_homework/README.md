@@ -24,6 +24,6 @@ DB -> Report : KPI reports
 DB -> Bandit : bandit algorithm with latest data
 Growthbook -> Producer : fetch recommand option from growthbook
 Bandit -> Producer : fetch recommand option from Bandit MachineAB
-Producer -> User : feed greedy option to new user
+Producer -> Consumer : feed greedy option to new user
 @enduml
 ```
