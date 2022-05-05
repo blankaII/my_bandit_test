@@ -1,44 +1,22 @@
-     ┌────┐                      ┌────┐          ┌────┐          ┌─────────┐             ┌──┐             ┌──────┐          ┌───────────┐
-     │User│                      │WebA│          │WebB│          │Collector│             │DB│             │Bandit│          │Web_Breeder│
-     └─┬──┘                      └─┬──┘          └─┬──┘          └────┬────┘             └┬─┘             └──┬───┘          └─────┬─────┘
-       │ 30% choose A, 10% choose B│               │                  │                   │                  │                    │      
-       │ ──────────────────────────>               │                  │                   │                  │                    │      
-       │                           │               │                  │                   │                  │                    │      
-       │         10% choose A, 30% choose B        │                  │                   │                  │                    │      
-       │ ──────────────────────────────────────────>                  │                   │                  │                    │      
-       │                           │               │                  │                   │                  │                    │      
-       │                           │           json from A            │                   │                  │                    │      
-       │                           │ ────────────────────────────────>│                   │                  │                    │      
-       │                           │               │                  │                   │                  │                    │      
-       │                           │               │   json from B    │                   │                  │                    │      
-       │                           │               │ ────────────────>│                   │                  │                    │      
-       │                           │               │                  │                   │                  │                    │      
-       │                           │               │                  │click history to DB│                  │                    │      
-       │                           │               │                  │───────────────────>                  │                    │      
-       │                           │               │                  │                   │                  │                    │      
-       │                           │               │                  │                   │ AB test algorithm│                    │      
-       │                           │               │                  │                   │ ─────────────────>                    │      
-       │                           │               │                  │                   │                  │                    │      
-       │                           │               │                  │                   │                  │   Better WebA/B    │      
-       │                           │               │                  │                   │                  │ ──────────────────>│      
-       │                           │               │                  │                   │                  │                    │      
-       │                           │               │  feed greedy option to new user      │                  │                    │      
-       │ <─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────      
-     ┌─┴──┐                      ┌─┴──┐          ┌─┴──┐          ┌────┴────┐             ┌┴─┐             ┌──┴───┐          ┌─────┴─────┐
-     │User│                      │WebA│          │WebB│          │Collector│             │DB│             │Bandit│          │Web_Breeder│
-     └────┘                      └────┘          └────┘          └─────────┘             └──┘             └──────┘          └───────────┘
+![alt text](https://github.com/blankaII/my_bandit_test/blob/main/20220504_homework/bandit_homework.png?raw=true)
 ################################################################################
-- http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000
 
-<p><code>
+UML diagraom was drawed with
+- http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000
+```
 @startuml
-User -> WebA : 30% choose A, 10% choose B
-User -> WebB : 10% choose A, 30% choose B
-WebA -> Collector : json from A
-WebB -> Collector : json from B
-Collector -> DB : click history to DB
-DB -> Bandit : AB test algorithm
-Bandit -> Web_Breeder : Better WebA/B
-Web_Breeder -> User : feed greedy option to new user
+User -> WebA0.3click300Earned : click or not
+User -> WebB0.1click100Earned : click or not
+WebA0.3click300Earned -> GrowthBook : click was snapped
+WebB0.1click100Earned -> GrowthBook : click was snapped
+Growthbook -> DB : growthbook internal
+WebA0.3click300Earned -> Collector : information pack with json
+WebB0.1click100Earned -> Collector : information pack with json
+Collector -> DB : current gross/net profit
+Collector -> DB : click click information to
+DB -> Bandit : bandit algorithm with realtime data
+Growthbook -> OptionFetcher : fetch recommand option from growthbook
+Bandit -> OptionFetcher : fetch recommand option from Bandit MachineAB
+OptionFetcher -> User : feed greedy option to new user
 @enduml
-</code></p>
+```
